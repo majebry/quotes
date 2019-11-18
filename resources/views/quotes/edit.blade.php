@@ -8,8 +8,8 @@
             </div>
             <div class="card-body">
                 @include('quotes._form', [
-                    'actionRoute' => route('quotes.store'),
-                    'method' => 'POST'
+                    'actionRoute' => route('quotes.update', $quote->id),
+                    'method' => 'PATCH'
                 ])
             </div>
         </div>

@@ -5,7 +5,7 @@ Route::namespace('Admin')->group(function() {
 });
 
 Route::middleware('auth:web_admin')->group(function() {
-    Route::resource('quotes', 'QuoteController', ['only' => ['create', 'store']]);
+    Route::resource('quotes', 'QuoteController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });
 
 Route::resource('quotes', 'QuoteController', ['only' => 'show']);

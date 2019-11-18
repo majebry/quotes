@@ -15,18 +15,25 @@
                 <div class="card-header">
                     <strong class="card-title">Viewing Quote</strong>
                 </div>
-                <div class="card-body" style="font-size: 2em;">
-                    {{-- {{ $quote->quote }} --}}
-                    @foreach ($quote->tags as $tag)
-                        <?php $newQuoteString = str_replace($tag->name, '<a href="' . url('?tag=' . $tag->name) . '">' . $tag->name . '</a>', '') ?>
-                    @endforeach
-
-                    <?php echo preg_replace("/(" . implode("|", $quote->tags()->pluck('name')->toArray()) . ")/i", "<a href=\"" . url('?tag=$1') . "\">$1</a>", $quote->quote); ?>
+                <div class="card-body">
+                    <p style="font-size: 2em;">
+                        <?php echo preg_replace("/(" . implode("|", $quote->tags()->pluck('name')->toArray()) . ")/i", "<a href=\"" . url('?tag=$1') . "\">$1</a>", $quote->quote); ?>
+                    </p>
+                    <p>{{ $quote->author ? "~ $quote->author" : '' }}{{ $quote->source ? ", $quote->source" : '' }}</p>
                 </div>
-                <div class="card-footer">
+                <div class="card-body">
                     @foreach ($quote->tags as $tag)
                         {{ $tag->name }},
                     @endforeach
+                </div>
+                <div class="card-footer text-right">
+                    <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-warning">Edit</a>
+
+                    <form action="{{ route('quotes.destroy', $quote->id) }}" style="display: inline;" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
                 </div>
             </div>
         @else

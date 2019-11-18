@@ -23,8 +23,18 @@ class QuoteController extends Controller
 
         $tags = explode(', ', $request->tags);
 
-        $quote = Quote::forceCreate([
+        $tags = array_filter($tags, function($tag) {
+            return trim($tag) != '';
+        });
+
+        $tags = array_map(function($tag) {
+            return trim($tag);
+        }, $tags);
+
+        $quote = Quote::create([
             'quote' => $request->quote,
+            'author' => $request->author,
+            'source' => $request->source,
             'tags' => $tags
         ]);
 
@@ -36,5 +46,50 @@ class QuoteController extends Controller
         $tags = Tag::all();
 
         return view('quotes.show', compact('quote', 'tags'));
+    }
+
+    public function edit(Quote $quote)
+    {
+        $tags = Tag::all();
+
+        return view('quotes.edit', compact('quote', 'tags'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'quote' => 'required'
+        ]);
+
+        // Refactor the bellow duplicated code
+        $tags = explode(',', $request->tags);
+
+        $tags = array_filter($tags, function($tag) {
+            return trim($tag) != '';
+        });
+
+        $tags = array_map(function($tag) {
+            return trim($tag);
+        }, $tags);
+        // Refactor the above duplicated code
+
+        $quote = Quote::findOrFail($id);
+
+        $quote->update([
+            'quote' => $request->quote,
+            'author' => $request->author,
+            'source' => $request->source,
+        ]);
+
+        $quote->syncTags($tags);
+
+        return redirect()->route('quotes.show', $id);
+    }
+
+    public function destroy(Quote $quote)
+    {
+        $quote->delete();
+
+        return redirect('/');
     }
 }

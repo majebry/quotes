@@ -9,5 +9,5 @@ class Quote extends Model
 {
     use HasTags;
 
-    protected $fillable = ['quote', 'tags'];
+    protected $fillable = ['quote', 'author', 'source', 'tags'];
 }
