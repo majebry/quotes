@@ -26,15 +26,17 @@
                         {{ $tag->name }},
                     @endforeach
                 </div>
-                <div class="card-footer text-right">
-                    <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-warning">Edit</a>
+                @auth('web_admin')
+                    <div class="card-footer text-right">
+                        <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-warning">Edit</a>
 
-                    <form action="{{ route('quotes.destroy', $quote->id) }}" style="display: inline;" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Delete" class="btn btn-danger">
-                    </form>
-                </div>
+                        <form action="{{ route('quotes.destroy', $quote->id) }}" style="display: inline;" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    </div>
+                @endauth
             </div>
         @else
             <div class="alert alert-warning">No data!</div>

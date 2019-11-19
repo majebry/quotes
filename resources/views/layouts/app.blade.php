@@ -21,7 +21,15 @@
 </head>
 <body>
     <div id="app">
-        <div class="alert alert-warning text-center">This app is still under early stages of development.</div>
+        <div class="alert-warning text-center">
+            <strong>
+                <u>
+                    Please notice that this app is still under development,
+                    the content is still growing,
+                    and I've plans for adding more features in Dec 19 and Jan 20.
+                </u>
+            </strong>
+        </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -45,9 +53,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest('web_admin')
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            </li> --}}
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
