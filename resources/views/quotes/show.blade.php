@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 @foreach ($tags as $tag)
-                    <a href="{{ url('/?tag=' . $tag->name) }}" class="btn btn-light">{{ $tag->name }}</a>
+                    <a href="{{ url('/?tag=' . $tag->name) }}" class="btn btn-light">{{ $tag->name }} {{ $tag->count }}</a>
                 @endforeach
             </div>
         </div>

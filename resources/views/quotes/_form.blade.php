@@ -3,7 +3,7 @@
     @method($method)
 
     <div class="form-group">
-        <textarea name="quote" onkeyup="document.getElementById('charactersCount').innerHTML = 'Characters left: ' + (140 - this.value.length)" class="form-control" placeholder="Silence is the language When I pronounce the word Silence, I destroy it...">{{ isset($quote) ? $quote->quote : '' }}</textarea>
+        <textarea name="quote" onkeyup="document.getElementById('charactersCount').innerHTML = 'Characters left: ' + (140 - this.value.length)" class="form-control" placeholder="When I pronounce the word Silence, I destroy it...">{{ isset($quote) ? $quote->quote : '' }}</textarea>
         <span id="charactersCount"></span>
     </div>
     <div class="form-group">
