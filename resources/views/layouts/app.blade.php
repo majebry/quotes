@@ -36,8 +36,10 @@
                 <u>
                     Please notice that this app is still under development,
                     the content is still growing,
-                    and I've plans for adding more features in Dec 19 and Jan 20.
+                    and I've plans for adding more features next months.
                 </u>
+                <br>
+                Suggest me a feature: <a href="http://hani.ly">www.hani.ly</a>
             </strong>
         </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
