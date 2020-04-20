@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Quote;
 use Illuminate\Http\Request;
-use Spatie\Tags\Tag;
 
 class QuoteController extends Controller
 {

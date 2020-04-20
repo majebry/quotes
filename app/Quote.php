@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Tags\HasTags;
 
 class Quote extends Model
 {
-    use HasTags;
+    protected $fillable = [
+        'quote', 'author', 'source'
+    ];
 
-    protected $fillable = ['quote', 'author', 'source', 'tags'];
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

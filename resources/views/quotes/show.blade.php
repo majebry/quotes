@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 @foreach ($tags as $tag)
-                    <a href="{{ url('/?tag=' . $tag->name) }}" class="btn btn-light">{{ $tag->name }} {{ $tag->count }}</a>
+                    <a href="{{ url('/?tag=' . $tag->slug) }}" class="btn btn-light">{{ $tag->slug }} {{ $tag->count }}</a>
                 @endforeach
             </div>
         </div>
@@ -17,13 +17,13 @@
                 </div>
                 <div class="card-body">
                     <p style="font-size: 2em;">
-                        <?php echo preg_replace("/(" . implode("|", $quote->tags()->pluck('name')->toArray()) . ")/i", "<a href=\"" . url('?tag=$1') . "\">$1</a>", $quote->quote); ?>
+                        <?php echo preg_replace("/(" . implode("|", $quote->tags()->pluck('slug')->toArray()) . ")/i", "<a href=\"" . url('?tag=$1') . "\">$1</a>", $quote->quote); ?>
                     </p>
                     <p>{{ $quote->author ? "~ $quote->author" : '' }}{{ $quote->source ? ", $quote->source" : '' }}</p>
                 </div>
                 <div class="card-body">
                     @foreach ($quote->tags as $tag)
-                        {{ $tag->name }},
+                        {{ $tag->slug }},
                     @endforeach
                 </div>
                 @auth('web_admin')
