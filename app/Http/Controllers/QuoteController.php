@@ -31,12 +31,15 @@ class QuoteController extends Controller
             return trim($tag);
         }, $tags);
 
+        $tagIds = Tag::whereIn('slug', $tags)->pluck('id');
+
         $quote = Quote::create([
             'quote' => $request->quote,
             'author' => $request->author,
             'source' => $request->source,
-            'tags' => $tags
         ]);
+
+        $quote->tags()->attach($tagIds);
 
         return redirect()->route('quotes.show', $quote->id);
     }
@@ -71,6 +74,9 @@ class QuoteController extends Controller
         $tags = array_map(function($tag) {
             return trim($tag);
         }, $tags);
+
+        $tagIds = Tag::whereIn('slug', $tags)->pluck('id');
+
         // Refactor the above duplicated code
 
         $quote = Quote::findOrFail($id);
@@ -81,7 +87,7 @@ class QuoteController extends Controller
             'source' => $request->source,
         ]);
 
-        $quote->syncTags($tags);
+        $quote->tags()->sync($tagIds);
 
         return redirect()->route('quotes.show', $id);
     }

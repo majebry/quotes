@@ -24,6 +24,10 @@ class RandomQuoteController extends Controller
             });
         }
 
+        if ($request->search) {
+            $quote->where('quote', 'LIKE', "%{$request->search}%");
+        }
+
         $quote = $quote->inRandomOrder()->first();
 
         $tags = Tag::all();
